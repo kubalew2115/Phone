@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="iphone">
+        <div id="ekran">
+            
+            <div class="div1">
+                <a class="czas" id="czas"></a>
+                <img class="bara" src="bar.png">
+                <img class="wifi" src="wifi.jpg">
+            </div>
+            <div class="div2">
+                <div id="kalkulator" class="kalka">
+                    <br><input class="inp" type="text" id="wynik" readonly>
+                    <br><br>
+                    <div class="nm">
+                        <button onclick="appendToResult('1')"><img class="num" src="1.png"></button></button>
+                        <button onclick="appendToResult('2')"><img class="num" src="2.png"></button></button>
+                        <button onclick="appendToResult('3')"><img class="num" src="3.png"></button></button>
+
+                        
+                        <button onclick="appendToResult('4')"><img class="num" src="4.png"></button></button>
+                        <button onclick="appendToResult('5')"><img class="num" src="5.png"></button></button>
+                        <button onclick="appendToResult('6')"><img class="num" src="6.png"></button></button>
+
+                        
+                        <button onclick="appendToResult('7')"><img class="num" src="7.png"></button>
+                        <button onclick="appendToResult('8')"><img class="num" src="8.png"></button></button>
+                        <button onclick="appendToResult('9')"><img class="num" src="9.png"></button></button>
+
+                        
+                        <button onclick="clearResult()"><img class="num" src="C.png"></button></button>
+                        <button onclick="appendToResult('0')"><img class="num" src="0.png"></button></button>                    
+
+
+
+                        <button onclick="appendToResult('+')"><img class="num" src="+.png"></button></button>
+                        <button onclick="appendToResult('-')"><img class="num" src="-.png"></button></button>
+                        <button onclick="appendToResult('*')"><img class="num" src="x.png"></button></button>
+                        <button onclick="appendToResult('/')"><img class="num" src="%.png"></button></button>
+                        <button onclick="calculateResult()" class="l"><img class="num" src="=.png"></button></button>
+                    </div>
+                </div>
+            </div>
+            <div class="div3">
+                <a href="index.html">
+                    <img class="apka1" src="strzalka.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="mail.png">
+                </a>
+                <a href="aparat.html">
+                    <img class="apka1" src="aparat.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="off.png">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayCurrentTime() { 
+          var currentDate = new Date();
+          var hours = currentDate.getHours();
+          var minutes = currentDate.getMinutes();
+          
+          hours = (hours < 10) ? "0" + hours : hours;
+          minutes = (minutes < 10) ? "0" + minutes : minutes;
+          
+          var currentTimeString = hours + ":" + minutes;
+          document.getElementById("czas").textContent = currentTimeString;
+        }
+      
+        setInterval(displayCurrentTime, 1);
+    </script>
+    <script>
+        var result = document.getElementById("wynik");
+
+        function appendToResult(value) {
+            result.value += value;
+        }
+
+        function clearResult() {
+            result.value = "";
+        }
+
+        function calculateResult() {
+        try {
+            result.value = eval(result.value);
+        } catch (error) {
+            result.value = "Błąd";
+        }
+}
+    </script>
+</body>
+</html>

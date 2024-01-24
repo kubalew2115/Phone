@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body onLoad="initClock()">
+    <div id="iphone">
+        <div id="ekran">
+            
+            <div class="div1">
+                <a class="czas" id="czas"></a>
+                <img class="bara" src="bar.png">
+                <img class="wifi" src="wifi.jpg">
+            </div>
+            <div class="div21">
+                <form class="form-signin" role="form" action="#">
+  
+                    <h2 class="form-signin-heading text-center">Send a Email</h2><br>
+                  
+                    <input type="text" placeholder="Imię" class="form-control">
+                  
+                    <br><input type="email" placeholder="E-mail" class="form-control"><br>  
+                    
+                  <br><textarea placeholder="Message" class="form-control"></textarea>
+                    
+
+                   
+                  <input class="bubbly-button" type="submit" class="btn btn-lg btn-block btn-primary" value="Send ">
+                    
+                    
+                  </form>
+            </div>
+            <div class="div3">
+                <a href="index.html">
+                <img class="apka1" src="strzalka.png">
+                </a>
+                <a href="mail.html">
+                    <img class="apka1" src="mail.png">
+                </a>
+                <a href="aparat.html">
+                    <img class="apka1" src="aparat.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="off.png">
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayCurrentTime() { 
+          var currentDate = new Date();
+          var hours = currentDate.getHours();
+          var minutes = currentDate.getMinutes();
+          
+          hours = (hours < 10) ? "0" + hours : hours;
+          minutes = (minutes < 10) ? "0" + minutes : minutes;
+          
+          var currentTimeString = hours + ":" + minutes;
+          document.getElementById("czas").textContent = currentTimeString;
+        }
+      
+        
+        setInterval(displayCurrentTime, 1);
+    </script>
+    <script>
+        
+
+        Number.prototype.pad = function(n) {
+        for (var r = this.toString(); r.length < n; r = 0 + r);
+        return r;
+        };
+
+        function updateClock() {
+        var now = new Date();
+        var milli = now.getMilliseconds(),
+            sec = now.getSeconds(),
+            min = now.getMinutes(),
+            hou = now.getHours(),
+            mo = now.getMonth(),
+            dy = now.getDate(),
+            yr = now.getFullYear();
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+            corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+        for (var i = 0; i < tags.length; i++)
+            document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+        }
+
+        function initClock() {
+        updateClock();
+        window.setInterval("updateClock()", 1);
+        }
+
+        
+    </script>
+    <script>
+        var animateButton = function(e) {
+
+        e.preventDefault;
+        //reset animation
+        e.target.classList.remove('animate');
+
+        e.target.classList.add('animate');
+        setTimeout(function(){
+        e.target.classList.remove('animate');
+        },700);
+        };
+
+        var bubblyButtons = document.getElementsByClassName("bubbly-button");
+
+        for (var i = 0; i < bubblyButtons.length; i++) {
+        bubblyButtons[i].addEventListener('click', animateButton, false);
+        }
+    </script>
+</body>
+</html>

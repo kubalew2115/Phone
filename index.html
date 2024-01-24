@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body onLoad="initClock()">
+    <div id="iphone">
+        <div id="ekran">
+            
+            <div class="div1">
+                <a class="czas" id="czas"></a>
+                <img class="bara" src="bar.png">
+                <img class="wifi" src="wifi.jpg">
+            </div>
+            <div class="div21">
+                <div id="timedate">
+                    <a id="mon">January</a>
+                    <a id="d">1</a>
+                    <a id="y">0</a><br />
+                    <a id="h">12</a> :
+                    <a id="m">00</a>:
+                    <a id="s">00</a>:
+                    <a id="mi">000</a>
+                </div>
+                <div class="ap">
+                    <a href="snake.html">
+                    <img class="apka" src="snake.png">
+                    </a>
+                    <a href="kalkulator.html">
+                    <img class="apka" src="kalk.png">
+                    </a>
+                    <a href="galeria.html">
+                    <img class="apka" src="galeria.png">
+                    </a>
+                    <a href="notatki.html">
+                    <img class="apka" src="notes.png">
+                    </a>
+                </div>
+            </div>
+            <div class="div3">
+                <img class="apka1" src="strzalka.png">
+                <a href="mail.html">
+                    <img class="apka1" src="mail.png">
+                </a>
+                <a href="aparat.html">
+                    <img class="apka1" src="aparat.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="off.png">
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayCurrentTime() { 
+          var currentDate = new Date();
+          var hours = currentDate.getHours();
+          var minutes = currentDate.getMinutes();
+          
+          hours = (hours < 10) ? "0" + hours : hours;
+          minutes = (minutes < 10) ? "0" + minutes : minutes;
+          
+          var currentTimeString = hours + ":" + minutes;
+          document.getElementById("czas").textContent = currentTimeString;
+        }
+      
+        
+        setInterval(displayCurrentTime, 1);
+    </script>
+    <script>
+        
+
+        Number.prototype.pad = function(n) {
+        for (var r = this.toString(); r.length < n; r = 0 + r);
+        return r;
+        };
+
+        function updateClock() {
+        var now = new Date();
+        var milli = now.getMilliseconds(),
+            sec = now.getSeconds(),
+            min = now.getMinutes(),
+            hou = now.getHours(),
+            mo = now.getMonth(),
+            dy = now.getDate(),
+            yr = now.getFullYear();
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var tags = ["mon", "d", "y", "h", "m", "s", "mi"],
+            corr = [months[mo], dy, yr, hou.pad(2), min.pad(2), sec.pad(2), milli];
+        for (var i = 0; i < tags.length; i++)
+            document.getElementById(tags[i]).firstChild.nodeValue = corr[i];
+        }
+
+        function initClock() {
+        updateClock();
+        window.setInterval("updateClock()", 1);
+        }
+
+        
+    </script>
+</body>
+</html>

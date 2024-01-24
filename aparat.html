@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telefon</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="iphone">
+        <div id="ekran">
+            
+            <div class="div1">
+                <a class="czas" id="czas"></a>
+                <img class="bara" src="bar.png">
+                <img class="wifi" src="wifi.jpg">
+            </div>
+            <div class="div2">
+                <div class="video-container">
+                    <video class="kamera" id="video" width="200%" height="100%" autoplay playsinline></video>
+                </div>
+                <button class="bubbly-button" onclick="captureAndSave()">Capture & Save</button>
+            </div>
+            
+            <div class="div3">
+                <a href="index.html">
+                    <img class="apka1" src="strzalka.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="mail.png">
+                </a>
+                <a href="aparat.html">
+                    <img class="apka1" src="aparat.png">
+                </a>
+                <a href="">
+                    <img class="apka1" src="off.png">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function displayCurrentTime() { 
+          var currentDate = new Date();
+          var hours = currentDate.getHours();
+          var minutes = currentDate.getMinutes();
+          
+          hours = (hours < 10) ? "0" + hours : hours;
+          minutes = (minutes < 10) ? "0" + minutes : minutes;
+          
+          var currentTimeString = hours + ":" + minutes;
+          document.getElementById("czas").textContent = currentTimeString;
+        }
+      
+        
+        setInterval(displayCurrentTime, 1);
+        
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Pobieramy elementy DOM
+            var video = document.getElementById('video');
+            var kameraDiv = document.getElementById('kamera');
+    
+            // Sprawdzamy, czy przeglądarka obsługuje getUserMedia
+            navigator.getUserMedia = navigator.getUserMedia ||
+                navigator.webkitGetUserMedia ||
+                navigator.mozGetUserMedia ||
+                navigator.msGetUserMedia;
+    
+            if (navigator.getUserMedia) {
+                // Włączamy kamerę
+                navigator.getUserMedia({ video: true }, function (stream) {
+                    video.srcObject = stream;
+                }, function (err) {
+                    console.error("Błąd włączania kamery: ", err);
+                });
+            } else {
+                console.error("Twoja przeglądarka nie obsługuje getUserMedia.");
+            }
+        });
+    </script>
+        <script>
+            function displayCurrentTime() { 
+                var currentDate = new Date();
+                var hours = currentDate.getHours();
+                var minutes = currentDate.getMinutes();
+                
+                hours = (hours < 10) ? "0" + hours : hours;
+                minutes = (minutes < 10) ? "0" + minutes : minutes;
+                
+                var currentTimeString = hours + ":" + minutes;
+                document.getElementById("czas").textContent = currentTimeString;
+            }
+    
+            setInterval(displayCurrentTime, 1);
+    
+            document.addEventListener("DOMContentLoaded", function() {
+                navigator.getUserMedia = navigator.getUserMedia ||
+                    navigator.webkitGetUserMedia ||
+                    navigator.mozGetUserMedia ||
+                    navigator.msGetUserMedia;
+    
+                if (navigator.getUserMedia) {
+                    navigator.getUserMedia({ video: true }, function (stream) {
+                        document.getElementById('video').srcObject = stream;
+                    }, function (err) {
+                        console.error("Błąd włączania kamery: ", err);
+                    });
+                } else {
+                    console.error("Twoja przeglądarka nie obsługuje getUserMedia.");
+                }
+            });
+    
+            function captureAndSave() {
+                var canvas = document.createElement('canvas');
+                var video = document.getElementById('video');
+                var context = canvas.getContext('2d');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+                // Convert the canvas content to a data URL and create a download link
+                var dataURL = canvas.toDataURL('image/jpeg');
+                var link = document.createElement('a');
+                link.href = dataURL;
+                link.download = 'captured_image.jpg';
+                link.click();
+            }
+        </script>
+    
+</body>
+</html>
